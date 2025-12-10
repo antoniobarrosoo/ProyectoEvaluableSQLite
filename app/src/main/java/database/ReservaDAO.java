@@ -1,6 +1,5 @@
 package database;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,15 +10,30 @@ import java.util.List;
 
 import entidades.Reserva;
 
-
+/**
+ * Clase ReservaDAO que proporciona métodos para gestionar la tabla Reserva
+ * de la base de datos, incluyendo operaciones CRUD.
+ */
 public class ReservaDAO {
 
+    /** Helper para la base de datos SQLite */
     private DbHelper dbHelper;
 
+    /**
+     * Constructor que inicializa el DbHelper.
+     *
+     * @param context Contexto de la aplicación
+     */
     public ReservaDAO(Context context) {
         dbHelper = new DbHelper(context);
     }
 
+    /**
+     * Inserta una nueva reserva en la base de datos.
+     *
+     * @param reserva Reserva a insertar
+     * @return ID generado para la nueva reserva, o -1 si hubo error
+     */
     public long insertarReserva(Reserva reserva) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -30,6 +44,12 @@ public class ReservaDAO {
         db.close();
         return id;
     }
+
+    /**
+     * Obtiene todas las reservas de la base de datos.
+     *
+     * @return Lista de reservas
+     */
     public List<Reserva> obtenerTodasLasReservas() {
         List<Reserva> lista = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -44,9 +64,17 @@ public class ReservaDAO {
                 lista.add(r);
             } while (c.moveToNext());
         }
-        c.close(); db.close();
+        c.close();
+        db.close();
         return lista;
     }
+
+    /**
+     * Obtiene una reserva por su ID.
+     *
+     * @param id ID de la reserva
+     * @return Reserva encontrada o null si no existe
+     */
     public Reserva obtenerReservaPorId(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.query("Reserva", null, "id_reserva = ?", new String[]{String.valueOf(id)}, null, null, null);
@@ -58,9 +86,17 @@ public class ReservaDAO {
             r.setId_evento(c.getInt(2));
             r.setId_tipo_entrada(c.getInt(3));
         }
-        c.close(); db.close();
+        c.close();
+        db.close();
         return r;
     }
+
+    /**
+     * Actualiza una reserva existente en la base de datos.
+     *
+     * @param reserva Reserva con datos actualizados
+     * @return Número de filas afectadas
+     */
     public int actualizarReserva(Reserva reserva) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues v = new ContentValues();
@@ -72,11 +108,15 @@ public class ReservaDAO {
         db.close();
         return filas;
     }
+
+    /**
+     * Elimina una reserva por su ID.
+     *
+     * @param id ID de la reserva a eliminar
+     */
     public void eliminarReserva(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete("Reserva", "id_reserva = ?", new String[]{String.valueOf(id)});
         db.close();
     }
-
-
 }

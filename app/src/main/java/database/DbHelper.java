@@ -1,44 +1,60 @@
 package database;
 
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Clase DbHelper que extiende SQLiteOpenHelper para crear y gestionar la base de datos.
+ * Define las tablas Cliente, TipoEntrada, Evento y Reserva, así como sus relaciones.
+ */
 public class DbHelper extends SQLiteOpenHelper {
 
+    /** Nombre de la base de datos */
     private static final String DB_NAME = "discoteca.db";
+
+    /** Versión de la base de datos */
     private static final int DB_VERSION = 1;
 
+    /**
+     * Constructor que llama al constructor de SQLiteOpenHelper.
+     *
+     * @param context Contexto de la aplicación
+     */
     public DbHelper(Context context) {
-
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    /**
+     * Se ejecuta al crear la base de datos por primera vez.
+     * Define todas las tablas y sus relaciones.
+     *
+     * @param db Base de datos SQLite
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Tabla Cliente
+        // Crear tabla Cliente
         db.execSQL("CREATE TABLE Cliente (" +
                 "id_cliente INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre TEXT NOT NULL, " +
                 "email TEXT, " +
                 "telefono TEXT);");
 
-        // Tabla TipoEntrada
+        // Crear tabla TipoEntrada
         db.execSQL("CREATE TABLE TipoEntrada (" +
                 "id_tipo_entrada INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre_tipo TEXT NOT NULL, " +
                 "precio REAL NOT NULL, " +
                 "descripcion TEXT);");
 
-        // Tabla Evento
+        // Crear tabla Evento
         db.execSQL("CREATE TABLE Evento (" +
                 "id_evento INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre_evento TEXT NOT NULL, " +
                 "fecha TEXT NOT NULL, " +
                 "aforo_maximo INTEGER NOT NULL);");
 
-        // Tabla Reserva
+        // Crear tabla Reserva con claves foráneas
         db.execSQL("CREATE TABLE Reserva (" +
                 "id_reserva INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "id_cliente INTEGER NOT NULL, " +
@@ -49,6 +65,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (id_tipo_entrada) REFERENCES TipoEntrada(id_tipo_entrada) ON DELETE CASCADE);");
     }
 
+    /**
+     * Se ejecuta cuando se actualiza la versión de la base de datos.
+     * Elimina las tablas existentes y las vuelve a crear.
+     *
+     * @param db Base de datos SQLite
+     * @param oldVersion Versión antigua
+     * @param newVersion Versión nueva
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Reserva");

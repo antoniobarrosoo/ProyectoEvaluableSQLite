@@ -9,15 +9,30 @@ import java.util.List;
 
 import entidades.Cliente;
 
+/**
+ * Clase DAO para manejar operaciones de la tabla Cliente en la base de datos SQLite.
+ * Permite insertar, actualizar, eliminar y consultar clientes.
+ */
 public class ClienteDAO {
 
+    /** Helper para gestionar la base de datos */
     private DbHelper dbHelper;
 
+    /**
+     * Constructor que inicializa el DbHelper.
+     *
+     * @param context Contexto de la aplicación.
+     */
     public ClienteDAO(Context context) {
         dbHelper = new DbHelper(context);
     }
 
-    // Insertar cliente
+    /**
+     * Inserta un nuevo cliente en la base de datos.
+     *
+     * @param cliente Objeto Cliente a insertar.
+     * @return ID del cliente insertado o -1 si hubo error.
+     */
     public long insertarCliente(Cliente cliente) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -29,7 +44,11 @@ public class ClienteDAO {
         return id;
     }
 
-    // Obtener todos los clientes
+    /**
+     * Obtiene todos los clientes de la base de datos.
+     *
+     * @return Lista de objetos Cliente.
+     */
     public List<Cliente> obtenerTodosLosClientes() {
         List<Cliente> lista = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -50,7 +69,12 @@ public class ClienteDAO {
         return lista;
     }
 
-    // Obtener un cliente por ID
+    /**
+     * Obtiene un cliente por su ID.
+     *
+     * @param id ID del cliente a buscar.
+     * @return Objeto Cliente si se encuentra, null si no existe.
+     */
     public Cliente obtenerClientePorId(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query("Cliente", null, "id_cliente = ?", new String[]{String.valueOf(id)}, null, null, null);
@@ -67,7 +91,12 @@ public class ClienteDAO {
         return c;
     }
 
-    // Actualizar cliente
+    /**
+     * Actualiza los datos de un cliente existente.
+     *
+     * @param cliente Objeto Cliente con los datos actualizados.
+     * @return Número de filas afectadas.
+     */
     public int actualizarCliente(Cliente cliente) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -79,7 +108,11 @@ public class ClienteDAO {
         return filas;
     }
 
-    //Actualizar cliente
+    /**
+     * Elimina un cliente de la base de datos por su ID.
+     *
+     * @param id ID del cliente a eliminar.
+     */
     public void eliminarCliente(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete("Cliente", "id_cliente = ?", new String[]{String.valueOf(id)});

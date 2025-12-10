@@ -1,6 +1,5 @@
 package com.example.proyectoevaluablesqlite;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,13 +12,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import database.ClienteDAO;
 import entidades.Cliente;
 
-
+/**
+ * Activity para gestionar la creación de nuevos clientes.
+ * Permite ingresar datos, guardarlos en la base de datos y navegar a la lista de clientes.
+ */
 public class GestionClientesActivity extends AppCompatActivity {
 
+    /** Campos de entrada para los datos del cliente */
     private EditText etNombre, etEmail, etTelefono;
+
+    /** Botón para guardar el cliente y botón para ver la lista de clientes */
     private Button btnGuardar, btnVerLista;
+
+    /** Acceso a las operaciones de base de datos de clientes */
     private ClienteDAO clienteDAO;
 
+    /**
+     * Inicializa la actividad, configura la interfaz y establece
+     * los eventos de interacción.
+     *
+     * @param savedInstanceState Estado previo de la activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +52,18 @@ public class GestionClientesActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String nombre = etNombre.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
                 String telefono = etTelefono.getText().toString().trim();
 
+                // Validación de campos obligatorios
                 if (nombre.isEmpty() || email.isEmpty() || telefono.isEmpty()) {
                     Toast.makeText(GestionClientesActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                // Crear cliente y guardarlo en la base de datos
                 Cliente cliente = new Cliente(nombre, email, telefono);
                 long id = clienteDAO.insertarCliente(cliente);
 
@@ -60,7 +76,7 @@ public class GestionClientesActivity extends AppCompatActivity {
             }
         });
 
-        // Ir a la lista de clientes
+        // Acción del botón para ver la lista de clientes
         btnVerLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,14 +84,18 @@ public class GestionClientesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Acción del icono para volver a la pantalla principal
         ImageView ivVolver = findViewById(R.id.ivVolver);
         ivVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
-
             startActivity(intent);
         });
     }
 
+    /**
+     * Limpia los campos de entrada después de guardar un cliente.
+     */
     private void limpiarCampos() {
         etNombre.setText("");
         etEmail.setText("");
