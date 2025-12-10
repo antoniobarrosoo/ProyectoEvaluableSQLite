@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/gradientereves">
+    <ImageView
+        android:id="@+id/ivVolver"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/atras"
+        android:contentDescription="Volver a inicio"
+        android:padding="12dp"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GESTIÓN DE CLIENTES"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#555"
+        android:layout_marginBottom="24dp"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/etTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Teléfono"
+        android:inputType="phone"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Guardar"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#808080"/>
+
+        <Button
+            android:id="@+id/btnVerLista"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ver Clientes"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#808080"/>
+
+    </LinearLayout>
+
+</LinearLayout>
