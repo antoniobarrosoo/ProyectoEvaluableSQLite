@@ -74,6 +74,7 @@ public class ListaClientesActivity extends AppCompatActivity {
         // Configurar swipe para eliminar clientes
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
+            //Cuando queremos mover un item se ejecuta:
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
                                   @NonNull RecyclerView.ViewHolder target) {
@@ -81,6 +82,7 @@ public class ListaClientesActivity extends AppCompatActivity {
             }
 
             @Override
+            //Se ejecuta cuando se desliza el item
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 Cliente cliente = listaClientes.get(position);

@@ -66,13 +66,14 @@ public class ListaReservasActivity extends AppCompatActivity {
 
         // Configurar swipe para eliminar reservas
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            //Cuando queremos mover un item se ejecuta:
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
                                   @NonNull RecyclerView.ViewHolder target) {
                 return false; // No se permite mover items
             }
-
+            //Se ejecuta cuando se desliza el item
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
