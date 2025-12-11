@@ -40,7 +40,7 @@ public class GestionEventosActivity extends AppCompatActivity {
 
         eventoDAO = new EventoDAO(this);
 
-        // --- Abrir calendario al tocar el EditText de fecha ---
+        // Abrir calendario al tocar el EditText de fecha
         etFecha.setFocusable(false); // Para que no aparezca teclado
         etFecha.setOnClickListener(v -> {
             final Calendar calendar = Calendar.getInstance();
