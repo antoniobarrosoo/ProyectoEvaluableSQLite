@@ -10,43 +10,30 @@ import com.example.proyectoevaluablesqlite.R;
 import java.util.List;
 import entidades.Cliente;
 
-/**
- * Adaptador para el RecyclerView de la lista de clientes.
- * Enlaza los datos de la entidad Cliente con la vista item_cliente.xml
- * y gestiona el evento de clic para editar un cliente.
- */
+
 public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteViewHolder> {
 
-    // Lista de clientes a mostrar en el RecyclerView
+
     private List<Cliente> listaClientes;
-    // Listener para manejar clics en los ítems
+
     private OnClienteClickListener listener;
 
-    /**
-     * Constructor del adaptador.
-     * @param listaClientes Lista de objetos Cliente a mostrar.
-     * @param listener Interfaz de callback para notificar clics en los ítems.
-     */
+
     public ClienteAdapter(List<Cliente> listaClientes, OnClienteClickListener listener) {
         this.listaClientes = listaClientes;
         this.listener = listener;
     }
 
-    /**
-     * Interfaz de callback para manejar el clic en un cliente del listado.
-     */
+
     public interface OnClienteClickListener {
-        /**
-         * Se llama cuando el usuario pulsa sobre un ítem del RecyclerView.
-         * @param cliente El objeto Cliente correspondiente al ítem pulsado.
-         */
+
         void onClienteClick(Cliente cliente);
     }
 
     @NonNull
     @Override
     public ClienteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Infla el layout de cada ítem (item_cliente.xml) para crear una nueva vista
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cliente, parent, false);
         return new ClienteViewHolder(view);
@@ -61,7 +48,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
         holder.tvEmail.setText(cliente.getEmail());
         holder.tvTelefono.setText(cliente.getTelefono());
 
-        // Asigna el listener de clic al ítem completo (toda la tarjeta)
+        // Asigna el listener de clic al ítem completo
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onClienteClick(cliente);

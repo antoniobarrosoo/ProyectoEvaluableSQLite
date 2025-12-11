@@ -40,8 +40,8 @@ public class GestionEventosActivity extends AppCompatActivity {
 
         eventoDAO = new EventoDAO(this);
 
-        // Abrir calendario al tocar el EditText de fecha
-        etFecha.setFocusable(false); // Para que no aparezca teclado
+        // Abrir calendario al tocar el EditText
+        etFecha.setFocusable(false);
         etFecha.setOnClickListener(v -> {
             final Calendar calendar = Calendar.getInstance();
             int año = calendar.get(Calendar.YEAR);
@@ -51,7 +51,7 @@ public class GestionEventosActivity extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     GestionEventosActivity.this,
                     (DatePicker view, int year, int month, int dayOfMonth) -> {
-                        // Formato YYYY-MM-DD para la base de datos
+
                         String fechaSeleccionada = year + "-" + String.format("%02d", month + 1) + "-" + String.format("%02d", dayOfMonth);
                         etFecha.setText(fechaSeleccionada);
                     }, año, mes, dia);

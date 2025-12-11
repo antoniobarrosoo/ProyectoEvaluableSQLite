@@ -73,7 +73,7 @@ public class ClienteDAO {
      * Obtiene un cliente por su ID.
      *
      * @param id ID del cliente a buscar.
-     * @return Objeto Cliente si se encuentra, null si no existe.
+     * @return Objeto Cliente si se encuentra
      */
     public Cliente obtenerClientePorId(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();

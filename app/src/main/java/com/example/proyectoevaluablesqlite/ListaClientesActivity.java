@@ -78,7 +78,7 @@ public class ListaClientesActivity extends AppCompatActivity {
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
                                   @NonNull RecyclerView.ViewHolder target) {
-                return false; // No se permite mover items
+                return false;
             }
 
             @Override
